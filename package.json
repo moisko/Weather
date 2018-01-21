@@ -4,7 +4,8 @@
   "description": "Simple react app",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -w"
+    "build": "webpack -w",
+    "start": "noder server.js"
   },
   "author": "Boris Borisov",
   "license": "MIT",
