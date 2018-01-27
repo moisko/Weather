@@ -25688,7 +25688,7 @@
 	
 	        function renderError() {
 	            if (typeof errorMessage === 'string') {
-	                return React.createElement(ErrorModal, null);
+	                return React.createElement(ErrorModal, { title: 'Error', message: errorMessage });
 	            }
 	        }
 	
@@ -25722,6 +25722,7 @@
 	
 	    onFormSubmit: function onFormSubmit(e) {
 	        e.preventDefault();
+	
 	        var location = this.refs.location.value;
 	        if (location.length > 0) {
 	            this.refs.location.value = '';
@@ -25738,10 +25739,7 @@
 	                React.createElement(
 	                    'div',
 	                    null,
-	                    React.createElement('input', { type: 'search',
-	                        placeholder: 'Search weather by city',
-	                        ref: 'location'
-	                    })
+	                    React.createElement('input', { type: 'search', placeholder: 'Search weather by city', ref: 'location' })
 	                ),
 	                React.createElement(
 	                    'div',
@@ -27364,27 +27362,38 @@
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 	
 	var React = __webpack_require__(8);
+	var ReactDOM = __webpack_require__(165);
+	var ReactDOMServer = __webpack_require__(270);
 	
 	var ErrorModal = React.createClass({
 	    displayName: 'ErrorModal',
 	
-	    componentDidMount: function componentDidMount() {
-	        var modal = new Foundation.Reveal($('#error-modal'));
-	        modal.open();
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            title: 'Error'
+	        };
 	    },
-	    render: function render() {
-	        return React.createElement(
+	    propTypes: {
+	        title: React.PropTypes.string,
+	        message: React.PropTypes.string
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var _props = this.props,
+	            title = _props.title,
+	            message = _props.message;
+	
+	        var modalMarkup = React.createElement(
 	            'div',
 	            { id: 'error-modal', className: 'reveal tiny text-center', 'data-reveal': '' },
 	            React.createElement(
 	                'h4',
 	                null,
-	                'Some title'
+	                title
 	            ),
 	            React.createElement(
 	                'p',
 	                null,
-	                'Our error message'
+	                message
 	            ),
 	            React.createElement(
 	                'p',
@@ -27396,6 +27405,16 @@
 	                )
 	            )
 	        );
+	
+	        var $modal = $(ReactDOMServer.renderToString(modalMarkup));
+	
+	        $(ReactDOM.findDOMNode(this)).html($modal);
+	
+	        var modal = new Foundation.Reveal($('#error-modal'));
+	        modal.open();
+	    },
+	    render: function render() {
+	        return React.createElement('div', null);
 	    }
 	});
 	
@@ -27894,6 +27913,15 @@
 	exports.push([module.id, ".page-title {\n  color: #555;\n  margin-top: 2.5rem;\n  margin-bottom: 2.5rem; }\n\ninput[type=search] {\n  box-shadow: none; }\n", ""]);
 	
 	// exports
+
+
+/***/ }),
+/* 270 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = __webpack_require__(155);
 
 
 /***/ })
