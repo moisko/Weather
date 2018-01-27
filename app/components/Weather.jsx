@@ -1,7 +1,7 @@
 const React = require('react');
 const WeatherForm = require('./WeatherForm');
 const WeatherMessage = require('./WeatherMessage');
-const openWeatherMap = require('../../api/openWeatherMap');
+const openWeatherMap = require('../api/openWeatherMap');
 const ErrorModal = require('./ErrorModal');
 
 const Weather = React.createClass({
@@ -55,7 +55,7 @@ const Weather = React.createClass({
 
         return (
             <div>
-                <h1 className="text-center">Get Weather</h1>
+                <h1 className="text-center page-title">Get Weather</h1>
                 <WeatherForm onSearch={this.handleSearch}/>
                 {renderMessage()}
                 {renderError()}

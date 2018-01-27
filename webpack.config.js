@@ -20,6 +20,10 @@ module.exports = {
         filename: './app/bundle.js'
     },
     resolve: {
+        root: __dirname,
+        alias: {
+            applicationStyles: 'app/styles/app.css'
+        },
         extensions: ['', '.js', '.jsx']
     },
     devtool: 'source-map',
